@@ -1,26 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { pedirDatos } from "../asyncMock";
-import itemList from "./itemList"; 
 
-const itemListContainer = () => {
+import ItemList from "./ItemList";
+
+
+const ItemListContainer = () => {
     const [products, setProducts] = useState([]);
-    console.log(products);
+    const [loading, setLoading] = useState(true); 
 
     useEffect(() => {
         console.log("aca se monta el componente");
         pedirDatos()
-            .then((res) => setProducts(res))
+            .then((res) => {
+                setProducts(res);
+                setLoading(false); 
+            })
             .catch((err) => console.log(err))
             .finally(() => console.log("termino la promesa"));
     }, []);
 
     return (
         <>
-            <h1>itemListContainer</h1>
-            <itemList products={products} /> 
+            <h1>Productos</h1>
+            {loading ? ( 
+                <p>Cargando....</p>
+            ) : (
+                <ItemList products={products} />
+            )}
         </>
     );
 };
 
-
-export default itemListContainer;
+export default ItemListContainer;

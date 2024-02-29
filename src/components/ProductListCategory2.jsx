@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { pedirDatos } from "../asyncMock";
-import ItemList from "./itemList";
+import ItemList from "./ItemList";
 
 const ProductListCategory2 = () => {
     const [products, setProducts] = useState([]);
@@ -13,7 +13,7 @@ const ProductListCategory2 = () => {
 
     return (
         <div>
-            <h1>Category 2</h1>
+            <h1>Sales</h1>
             <ItemList products={products} />
         </div>
     );

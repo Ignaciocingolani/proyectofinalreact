@@ -4,8 +4,8 @@ import Product from "../src/Product";
 import Contador from "../src/Contador";
 import ProductChildren from './ProductChildren';
 import ItemCount from './ContadorBtn';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import itemListContainer from "./components/itemListContainer"; 
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import ItemListContainer from "./components/ItemListContainer";
 import ProductListCategory1 from "./components/ProductListCategory1";
 import ProductListCategory2 from "./components/ProductListCategory2";
 
@@ -14,11 +14,11 @@ function App ()  {
         <Router>
             <div className="App">
                 <NavBar />
-                <Switch>
-                    <Route exact path="/" component={itemListContainer} />
-                    <Route path="/category1" component={ProductListCategory1} />
-                    <Route path="/category2" component={ProductListCategory2} />
-                </Switch>
+                <Routes>
+                    <Route exact path="/" element={ItemListContainer} />
+                    <Route path="/category1" element={ProductListCategory1} />
+                    <Route path="/category2" element={ProductListCategory2} />
+                </Routes>
             </div>
         </Router>
     );
