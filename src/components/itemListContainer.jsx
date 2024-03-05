@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { pedirDatos } from "../asyncMock";
 import ItemList from "./ItemList";
+import { Link } from 'react-router-dom';
 
 const ItemListContainer = () => {
     const [products, setProducts] = useState([]);
@@ -12,18 +13,21 @@ const ItemListContainer = () => {
                 setProducts(res);
                 setLoading(false);
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                console.log(err);
+                setLoading(false);
+            });
     }, []);
 
     return (
-        <>
-            <h1>Productos</h1>
+        <div className="text-center">
+            <h1>Todos nuestros productos</h1>
             {loading ? (
-                <p>Cargando....</p>
+                <p>Cargando...</p>
             ) : (
                 <ItemList products={products} />
             )}
-        </>
+        </div>
     );
 };
 
