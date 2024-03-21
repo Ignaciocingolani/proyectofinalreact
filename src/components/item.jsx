@@ -1,8 +1,10 @@
-import React, { useState } from "react";
-import { Card, Button, Form } from "react-bootstrap";
+import React, { useContext, useState } from 'react';
+import { Button, Card, Form } from 'react-bootstrap';
+import { CartContext } from './CartWidget/CartContext';
 
-const Item = ({ product, addToCart }) => {
-    const [quantity, setQuantity] = useState(0); // Cambiado de 1 a 0
+const Item = ({ product }) => {
+    const { addToCart } = useContext(CartContext);
+    const [quantity, setQuantity] = useState(1);
 
     const handleQuantityChange = (event) => {
         const value = parseInt(event.target.value);
@@ -16,7 +18,7 @@ const Item = ({ product, addToCart }) => {
     };
 
     return (
-        <Card style={{ width: "18rem" }}>
+        <Card style={{ width: '18rem' }}>
             <Card.Img variant="top" src={product.img} />
             <Card.Body>
                 <Card.Title>{product.name}</Card.Title>
@@ -27,7 +29,7 @@ const Item = ({ product, addToCart }) => {
                     <Form.Label>Cantidad:</Form.Label>
                     <Form.Control
                         type="number"
-                        min="0" 
+                        min="1"
                         max={product.stock}
                         value={quantity}
                         onChange={handleQuantityChange}

@@ -11,14 +11,14 @@ function NavBar() {
     <>
       <Navbar bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href="#home"><Logo/></Navbar.Brand>
+          <Navbar.Brand as={Link} to="/"><Logo/></Navbar.Brand> {}
           <Nav className="mr-auto">
             <Nav.Link as={Link} to="/">Inicio</Nav.Link>
             <Nav.Link as={Link} to="/category1">Descartables</Nav.Link>
             <Nav.Link as={Link} to="/category2">Sales</Nav.Link>
           </Nav>
           <Nav>
-            <Nav.Link as={Link} to="#"><CartWidget/></Nav.Link>
+            <Nav.Link as={Link} to="/cart"><CartWidget/></Nav.Link> {}
           </Nav>
         </Container>
       </Navbar>

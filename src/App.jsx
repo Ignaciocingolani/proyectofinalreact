@@ -1,11 +1,12 @@
 import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import NavBar from "../src/components/NavBar/NavBar";
 import Footer from "./components/Footer"; 
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ItemListContainer from "./components/ItemListContainer";
 import ProductList from "./components/ProductList";
 import { CartProvider } from "./components/CartWidget/CartContext"; 
 import CartWidget from "./components/CartWidget/CartWidget"; 
+import ShoppingCartPage from "./components/CartWidget/ShoppingCartPage";
 
 function App() {
     return (
@@ -17,13 +18,14 @@ function App() {
                         <Route exact path="/" element={<ItemListContainer />} />
                         <Route path="/category1" element={<ProductList category={1} />} />
                         <Route path="/category2" element={<ProductList category={2} />} />
+                        <Route path="/cart" element={<ShoppingCartPage />} />
                     </Routes>
-                    <CartWidget /> {}
+                    <CartWidget />
                     <Footer />
                 </CartProvider>
             </div>
         </Router>
     );
-};
+}
 
 export default App;

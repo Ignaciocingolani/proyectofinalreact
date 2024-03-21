@@ -1,13 +1,13 @@
 import React, { createContext, useState, useContext } from 'react';
 
-
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
     const [cartItems, setCartItems] = useState([]);
 
     const addToCart = (product) => {
-        setCartItems([...cartItems, product]);
+        const item = { ...product, imageUrl: product.img }; 
+        setCartItems([...cartItems, item]);
     };
 
     const removeFromCart = (productId) => {
@@ -25,7 +25,11 @@ export const CartProvider = ({ children }) => {
         clearCart
     };
 
-    return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
+    return (
+        <CartContext.Provider value={value}>
+            {children}
+        </CartContext.Provider>
+    );
 };
 
 export const useCart = () => {
