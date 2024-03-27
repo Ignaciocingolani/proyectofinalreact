@@ -5,9 +5,17 @@ export const CartContext = createContext();
 export const CartProvider = ({ children }) => {
     const [cartItems, setCartItems] = useState([]);
 
-    const addToCart = (product) => {
-        const item = { ...product, imageUrl: product.img }; 
-        setCartItems([...cartItems, item]);
+    const addToCart = (product, quantity) => { 
+        const existingItemIndex = cartItems.findIndex(item => item.id === product.id);
+
+        if (existingItemIndex !== -1) {
+            const updatedCartItems = [...cartItems];
+            updatedCartItems[existingItemIndex].quantity += quantity; 
+            setCartItems(updatedCartItems);
+        } else {
+            const item = { ...product, imageUrl: product.img, quantity }; 
+            setCartItems([...cartItems, item]);
+        }
     };
 
     const removeFromCart = (productId) => {

@@ -1,22 +1,49 @@
-import React from 'react';
-import Product from './Product';
+import { useEffect, useState } from 'react';
+import { initializeApp } from 'firebase/app';  
+import { getDatabase, ref, onValue } from 'firebase/database';  
 
-const ProductList = ({ products }) => {
-    if (!products || products.length === 0) {
-        return <p>No hay productos disponibles</p>;
-    }
+const ProductList = () => {
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+       
+        const firebaseConfig = {
+            
+        };
+        const app = initializeApp(firebaseConfig);
+
+        
+        const db = getDatabase(app);
+        const productsRef = ref(db, 'products');
+
+        
+        onValue(productsRef, (snapshot) => {
+            const productsData = snapshot.val();
+            const productsArray = Object.keys(productsData).map(key => ({
+                id: key,
+                ...productsData[key]
+            }));
+            setProducts(productsArray);
+        });
+
+       
+        return () => {
+            
+        };
+    }, []);
 
     return (
         <div>
-            {products.map(product => (
-                <Product
-                    key={product.id}
-                    img={product.img}
-                    title={product.name}
-                    description={product.description}
-                    price={product.price}
-                />
-            ))}
+            <h2>Lista de Productos</h2>
+            <ul>
+                {products.map(product => (
+                    <li key={product.id}>
+                        <h3>{product.name}</h3>
+                        <p>Precio: ${product.price}</p>
+                        <p>Descripción: {product.description}</p>
+                    </li>
+                ))}
+            </ul>
         </div>
     );
 };
