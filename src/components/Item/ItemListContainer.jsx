@@ -1,29 +1,38 @@
-import React, { useEffect, useState } from 'react';
-import { pedirDatos } from '../../asyncMock';
-import ProductList from "../Product/ProductList";
+import React, { useEffect, useState } from "react";
+import { pedirDatos } from "../asyncMock";
+import ItemList from "./ItemList";
+import { Link } from 'react-router-dom';
 
 const ItemListContainer = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [cart, setCart] = useState([]);
 
     useEffect(() => {
         pedirDatos()
-            .then((data) => {
-                setProducts(data);
+            .then((res) => {
+                setProducts(res);
                 setLoading(false);
             })
-            .catch((error) => {
-                console.log('Error fetching product data:', error);
+            .catch((err) => {
+                console.log(err);
                 setLoading(false);
             });
     }, []);
 
+    const addToCart = (product, quantity) => {
+        const item = { ...product, quantity };
+        setCart([...cart, item]);
+        console.log(`Agregando ${quantity} ${product.name} al carrito`);
+    };
+
     return (
-        <div>
+        <div className="text-center">
+            <h1>Todos nuestros productos</h1>
             {loading ? (
                 <p>Cargando...</p>
             ) : (
-                <ProductList products={products} />
+                <ItemList products={products} addToCart={addToCart} />
             )}
         </div>
     );

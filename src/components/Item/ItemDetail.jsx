@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 const ItemDetail = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
+  const [cart, setCart] = useState([]);
 
   const handleQuantityChange = (event) => {
     const value = parseInt(event.target.value);
@@ -9,7 +10,8 @@ const ItemDetail = ({ product }) => {
   };
 
   const addToCart = () => {
-    
+    const item = { ...product, quantity };
+    setCart([...cart, item]);
     console.log(`Agregando ${quantity} ${product.name} al carrito`);
   };
 
@@ -30,6 +32,16 @@ const ItemDetail = ({ product }) => {
         onChange={handleQuantityChange}
       />
       <button onClick={addToCart}>Agregar al carrito</button>
+      <div>
+        <h3>Productos en el carrito:</h3>
+        <ul>
+          {cart.map((item, index) => (
+            <li key={index}>
+              {item.quantity} {item.name} - ${item.price * item.quantity}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
