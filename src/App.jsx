@@ -5,7 +5,7 @@ import Footer from "./components/Footer";
 import ItemListContainer from "./components/ItemListContainer";
 import ProductList from "./components/ProductList";
 import { CartProvider } from "./components/CartWidget/CartContext"; 
-import CartWidget from "./components/CartWidget/CartWidget"; 
+
 import ShoppingCartPage from "./components/CartWidget/ShoppingCartPage";
 
 function App() {
