@@ -20,7 +20,7 @@ function App() {
                         <Route path="/category2" element={<ProductList category={2} />} />
                         <Route path="/cart" element={<ShoppingCartPage />} />
                     </Routes>
-                    <CartWidget />
+                    
                     <Footer />
                 </CartProvider>
             </div>
